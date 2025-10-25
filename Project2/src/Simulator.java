@@ -100,7 +100,6 @@ public class Simulator {
                     break;
 
                 default:
-
                     System.out.println("Unknown Command");
             }
         }
