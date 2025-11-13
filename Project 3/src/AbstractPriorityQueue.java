@@ -1,3 +1,4 @@
+
 /*******************************************************
  *  @Author : Ali Azhari   
  *  Created On : Sun Oct 19 2025
@@ -9,7 +10,7 @@
 import java.util.Comparator;
 
 public abstract class AbstractPriorityQueue<K, V> implements PriorityQueue<K, V> {
-
+    
     // ---------------- nested PQEntry class ----------------
     protected static class PQEntry<K, V> implements Entry<K, V> {
         private K k; // key
@@ -18,9 +19,10 @@ public abstract class AbstractPriorityQueue<K, V> implements PriorityQueue<K, V>
         public PQEntry(K key, V value) {
             k = key;
             v = value;
-        }
+        } 
 
         // methods of the Entry interface
+
         public K getKey() {
             return k;
         }
@@ -48,7 +50,7 @@ public abstract class AbstractPriorityQueue<K, V> implements PriorityQueue<K, V>
         comp = c;
     }
 
-
+   
     // Creates an empty priority queue based on the natural ordering of its keys.
     protected AbstractPriorityQueue() {
         this(new DefaultComparator<K>());

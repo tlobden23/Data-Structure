@@ -3,7 +3,7 @@
  *  @Author : Ali Azhari   
  *  Created On : Sun Oct 19 2025
  *  @File : DefaultComparator.java
- *
+ * 
  *  Description: For convenience, we also allow a default 
  *  priority queue to instead rely on the natural ordering 
  *  for the given keys (assuming those keys come from a 
@@ -18,5 +18,6 @@ public class DefaultComparator<E> implements Comparator<E> {
 
     public int compare(E a, E b) throws ClassCastException {
         return ((Comparable<E>) a).compareTo(b);
+
     }
 }
