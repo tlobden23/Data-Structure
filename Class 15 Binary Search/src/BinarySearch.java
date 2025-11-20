@@ -1,78 +1,75 @@
-public class BinarySearch {
-    private int[] array;
-    private int size;
+public class BinarySearch<E extends Comparable<E>> {
+    private Node<E> root;
 
-
-    public BinarySearch(){
-        this.array = new int[20];
-        this.size = 0;
+    public BinarySearch() {
+        this.root = null;
     }
-    public void insert(int value){
-        if (isEmtpy()) {
-            array[size++] = value;
-            ;
+
+    public void insert(E data) {
+        Node<E> newNode = new Node<>(data);
+
+        if (isEmpty()) {
+            this.root = newNode;
+        } else {
+
+            insertHelper(getRoot(), newNode);
+
+//            while (true) {
+//                System.out.println("Comparing " + current.getData() + " and " + newNode.getData());
+//                if (current.getData().compareTo(newNode.getData()) > 0) {
+//
+//                    if (current.getLeftNode() == null) {
+//                        System.out.println("Setting left node of " + current.getData() + " to " + newNode.getData());
+//                        current.setLeftNode(newNode);
+//                        break;
+//                    }
+//                    current = current.getLeftNode();
+//                } else {
+//                    if (current.getRightNode() == null) {
+//                        System.out.println("Setting right node of " + current.getData() + " to " + newNode.getData());
+//                        current.setRightNode(newNode);
+//                        break;
+//                    }
+//                    current = current.getRightNode();
+//                }
+//                System.out.println("Current is " + current.getData());
+//
+//                System.out.println("Current is " + current.getData() + " after switching");
+//            }
         }
-        else {
-            int parent = -1;
-            int current = 0;
-            while (current < array.length){
-                if (parent > value) {
+    }
 
-                    if (hasLeft(parent)) {
-                        parent = current;
-                        current = parent * 2 + 1;
-                    }
-                } else {
-                    if (hasRight(parent)) {
-                        parent = current;
-                        current = parent * 2 + 2;
-                    }
-                }
-
+    public void insertHelper(Node<E> node, Node<E> newNode){
+        if (node.getData().compareTo(newNode.getData()) > 0) {
+            if (node.getLeftNode() == null) {
+                node.setLeftNode(newNode);
+            }
+            else {
+                insertHelper(node.getLeftNode(), newNode);
+            }
+        } else {
+            if (node.getRightNode() == null) {
+                 node.setRightNode(newNode);
+            }
+            else {
+                insertHelper(node.getRightNode(), newNode);
             }
         }
     }
 
-    public void bubbleSort(int[] array){
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 1; j < array.length - i -1; j++) {
-                if (array[i] > array[j]) {
-                    int temp = array[i];
-                    array[i] = array[j];
-                    array[j] = temp;
-                }
-            }
-        }
+    public boolean isEmpty(){
+        return this.root == null;
     }
 
-    public boolean isEmtpy(){
-        if (array.length == 0) {
-            return true;
-        }
-        return false;
+    public Node<E> getRoot(){
+        return this.root;
     }
 
-    public boolean hasLeft(int index){
-        if (index*2+1 > size) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean hasRight(int index){
-        if (index*2 +2 > size) {
-            return false;
-        }
-        return true;
-    }
-
-    public void main(String[] args) {
-        int[] array = {50,20,100,30,60,10,8};
-
-        bubbleSort(array);
-
-        for (int i : array) {
-            System.out.println(array);
+    public void inOrder(Node<E> node){
+        if (node != null) {
+            inOrder(node.getLeftNode());
+            System.out.println(node.getData());
+            inOrder(node.getRightNode());
         }
     }
 }
