@@ -57,6 +57,10 @@ public class BinarySearch<E extends Comparable<E>> {
         }
     }
 
+    public Node<E> delete(E data) {
+        return null;
+    }
+
     public boolean isEmpty(){
         return this.root == null;
     }
