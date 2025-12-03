@@ -57,8 +57,59 @@ public class BinarySearch<E extends Comparable<E>> {
         }
     }
 
-    public Node<E> delete(E data) {
-        return null;
+    public void delete (E data) throws NullPointerException{
+        if (!isEmpty()) {
+            Node<E> parent = null;
+            Node<E> current = root;
+
+            while (current != null) {
+                if (current.getData().compareTo(data) > 0) {
+                    parent = current;
+                    current = current.getLeftNode();
+                }
+                else if (current.getData().compareTo(data) < 0) {
+                    parent = current;
+                    current = current.getRightNode();
+                }
+                else {
+                    break;
+                }
+            }
+
+            if (current == null) {
+                throw new NullPointerException("Data not found in Binary Search Tree");
+            }
+
+
+//            System.out.printf("Parent Node's data = %s\nCurrent Node's data = %s\n", parent.getData(), current.getData());
+
+            if ()
+
+            if (parent.getRightNode() == current) {
+                if (current.getRightNode() != null) {
+                    parent.setRightNode(current.getRightNode());
+                }
+                else if (current.getLeftNode() != null) {
+                    parent.setRightNode(current.getLeftNode());
+                }
+                else {
+                    parent.setRightNode(null);
+                }
+
+            }
+            else {
+                if (current.getRightNode() != null) {
+                    parent.setLeftNode(current.getRightNode());
+                }
+                else if (current.getLeftNode() != null) {
+                    parent.setLeftNode(current.getLeftNode());
+                    current.setLeftNode(null);
+                }
+                else {
+                    parent.setLeftNode(null);
+                }
+            }
+        }
     }
 
     public boolean isEmpty(){
